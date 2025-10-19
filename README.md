@@ -70,6 +70,59 @@ personal.auto.tfvars
 
 В state-файле найдем значение секретного содержимого созданного ресурса `random_password`:
 
+```
+{
+  "version": 4,
+  "terraform_version": "1.9.8",
+  "serial": 1,
+  "lineage": "28ab1746-24e6-7e9e-210d-f62c1071d31b",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "random_password",
+      "name": "random_string",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 3,
+          "attributes": {
+            "bcrypt_hash": "$2a$10$cvsyIGnIJq15oAyO4aPbQ.DBuezF/6Mjn6lZbLFWgPNv9DXYLaIOu",
+            "id": "none",
+            "keepers": null,
+            "length": 16,
+            "lower": true,
+            "min_lower": 1,
+            "min_numeric": 1,
+            "min_special": 0,
+            "min_upper": 1,
+            "number": true,
+            "numeric": true,
+            "override_special": null,
+            "result": "opOUco3zp2j8jrtQ",
+            "special": false,
+            "upper": true
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "bcrypt_hash"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "result"
+              }
+            ]
+          ]
+        }
+      ]
+
+
+```
+
 ![Screen_3_2](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_3_2.png)
 
 `"result":
