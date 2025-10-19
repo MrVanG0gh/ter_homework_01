@@ -4,10 +4,19 @@
 
 1. Скачайте и установите **Terraform** версии >=1.8.4 . Приложите скриншот вывода команды ```terraform --version```.
 
-
+Из облака Yandex был установлен дистрибутив Terraform версии 1.9.8:
+![Screen_0_1](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_0_1.png)
 
 2. Скачайте на свой ПК этот git-репозиторий. Исходный код для выполнения задания расположен в директории **01/src**.
+
+Была добавлена директория `src` из репозитория с заданием:
+![Screen_0_2](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_0_2.png)
+
 3. Убедитесь, что в вашей ОС установлен docker.
+
+На виртуальной системе установлен Docker версии 28.4.0:
+![Screen_0_3](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_0_3.png)
+
 
 ### Задание
 
