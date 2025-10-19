@@ -59,7 +59,7 @@
 # own secret vars store.
 personal.auto.tfvars
 ```
-Согласно логике файла всю персональную информацию можно хранить в файле `personal.auto.tfvars` (файл не будет находиться под версионным контролем)
+Согласно логике автора всю персональную информацию можно хранить в файле `personal.auto.tfvars` (он не будет находиться под версионным контролем)
 
 ---
 #### 3
@@ -170,6 +170,25 @@ resource "docker_container" "nginx" { # ошибка2
 
 `name  = "example_${random_password.random_string.result}"`
 
+Исправленная часть кода будет выглядеть следующим образом:
+
+```
+resource "docker_image" "nginx" {
+  name         = "nginx:latest"
+  keep_locally = true
+}
+
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.image_id
+  name  = "example_${random_password.random_string.result}"
+
+  ports {
+    internal = 80
+    external = 9090
+  }
+}
+```
+
 ---
 
 #### 5
@@ -211,6 +230,7 @@ resource "docker_container" "nginx" {
 
 Уничтожаем созданные ресурсы при помощи команды `terraform destroy`
 
+Файл terraform.tfstate содержит в себе:
 ```
 {
   "version": 4,
@@ -239,4 +259,4 @@ resource "docker_image" "nginx" {
   keep_locally = true
 }
 ```
-Значит, docker image не будет удален после скачивания.
+Значит, docker image не будет удален после применения команды `destroy`.
