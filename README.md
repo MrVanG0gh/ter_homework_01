@@ -125,6 +125,7 @@ personal.auto.tfvars
 
 ![Screen_3_2](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_3_2.png)
 
+
 `"result":
 "opOUco3zp2j8jrtQ",`
 
