@@ -177,9 +177,66 @@ resource "docker_container" "nginx" { # ошибка2
 Выполним код после исправления ошибок и опечаток:
 ![Screen_5_1](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_5_1.png)
 
-Видим, что имя контейнера содержит сгенерированное нами число:
+Видим, что имя контейнера содержит сгенерированную нами строку после example_:
 ```
 van@vans-srv:~/git/ter_homework_01/src$ docker ps
 CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                  NAMES
 881b00185a81   e35ad067421c   "/docker-entrypoint.…"   18 seconds ago   Up 17 seconds   0.0.0.0:9090->80/tcp   example_opOUco3zp2j8jrtQ
+
 ```
+---
+
+#### 6
+
+Задокументируем строку с именем контейнера и заменим ее на `hello_world`
+```
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.image_id
+  # name  = "example_${random_password.random_string.result}"
+  name = "hello_world"
+
+  ports {
+    internal = 80
+    external = 9090
+  }
+}
+```
+
+![Screen_6_1](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_6_1.png)
+
+Применение ключа -auto-approve опасно тем, что подтверждение изменений происходит без подтверждения со стороны человека. Возможны неожиданные результаты и негативные изменения в инфраструктуре.
+Если же есть полная уверенность в правильности конфигурации, то использование данного ключа может позволить применять скрипты для автоматического разворачивания инфраструктуры.
+
+#### 7
+
+Уничтожаем созданные ресурсы при помощи команды `terraform destroy`
+
+```
+{
+  "version": 4,
+  "terraform_version": "1.9.8",
+  "serial": 11,
+  "lineage": "28ab1746-24e6-7e9e-210d-f62c1071d31b",
+  "outputs": {},
+  "resources": [],
+  "check_results": null
+}
+```
+
+#### 8
+
+Изучив документацию, отметил, что ключ `keep_locally` определяет должен ли храниться docker image после скачивания, или нет.
+
+```
+keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation.
+```
+
+В коде было:
+
+```
+resource "docker_image" "nginx" {
+  name         = "nginx:latest"
+  keep_locally = true
+}
+```
+Значит, docker image не будет удален после скачивания.
