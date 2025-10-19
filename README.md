@@ -127,3 +127,59 @@ personal.auto.tfvars
 `"result":
 "opOUco3zp2j8jrtQ",`
 
+---
+
+#### 4
+
+Раздокументированный блок кода выглядит следующим образом:
+```
+
+resource "docker_image" { # ошибка1
+  name         = "nginx:latest"
+  keep_locally = true
+}
+
+resource "docker_container" "nginx" { # ошибка2
+  image = d_image.nginx.image_id
+  name  = "example_${random_password.random_string_FAKE.resulT}" # ошибка3
+
+  ports {
+    internal = 80
+    external = 9090
+  }
+}
+```
+Ошибка1:
+Согласно документации объявление `resource` должно быть следующим:
+
+`resource "<TYPE>" "<LABEL>"   block`
+ В нашем случае, тип ресурса задан, но не хватает имени. Исправим на:
+
+`resource "docker_image" "nginx'  {`
+На это имя будет ссылка далее.
+
+Ошибка2:
+Согласно документации имя для объекта не должно начинаться с цифры. Поэтому уберем лишнее и получим:
+
+`resource "docker_container" "nginx" {`
+
+Ошибка3:
+`name  = "example_${random_password.random_string_FAKE.resulT}" # ошибка3`
+
+Здесь допущена опечатка в атрибутах ресурса random_password. После исправлений все выглядит следующим образом:
+
+`name  = "example_${random_password.random_string.result}"`
+
+---
+
+#### 5
+
+Выполним код после исправления ошибок и опечаток:
+![Screen_5_1](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_5_1.png)
+
+Видим, что имя контейнера содержит сгенерированное нами число:
+```
+van@vans-srv:~/git/ter_homework_01/src$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                  NAMES
+881b00185a81   e35ad067421c   "/docker-entrypoint.…"   18 seconds ago   Up 17 seconds   0.0.0.0:9090->80/tcp   example_opOUco3zp2j8jrtQ
+```
