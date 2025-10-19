@@ -37,6 +37,10 @@
 
 #### 1
 
+Для того, чтобы скачать все необходимые зависимости для проекта используем команду `terraform init`
+
+![Screen_1](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_1.png)
+
 ---
 
 #### 2
@@ -58,3 +62,17 @@ personal.auto.tfvars
 Согласно логике файла всю персональную информацию можно хранить в файле `personal.auto.tfvars` (файл не будет находиться под версионным контролем)
 
 ---
+#### 3
+
+Выполним код проекта при помощи команды `terraform apply`
+
+![Screen_3_1](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_3_1.png)
+
+В state-файле найдем значение секретного содержимого созданного ресурса `random_password`:
+
+![Screen_3_2](https://github.com/MrVanG0gh/ter_homework_01/blob/main/Screenshots/Screenshot_3_2.png)
+
+`"result":
+"opOUco3zp2j8jrtQ",`
+
+
